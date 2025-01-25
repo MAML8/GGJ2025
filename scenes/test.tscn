@@ -1,0 +1,100 @@
+[gd_scene load_steps=10 format=3 uid="uid://cq2jnpqup6ogt"]
+
+[ext_resource type="Script" path="res://scripts/camera_ui.gd" id="1_0cynw"]
+[ext_resource type="Texture2D" uid="uid://7fhocvf0bvqp" path="res://art/placeholder/bolinha maniaca.png" id="1_4yx0t"]
+[ext_resource type="Shape2D" uid="uid://c5n0mb6rotd6m" path="res://shapes/colisão-jogador.tres" id="1_7m7we"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_x1fca"]
+[ext_resource type="PackedScene" uid="uid://du5yh8xmo8t14" path="res://scenes/instances/bubble.tscn" id="5_irofg"]
+[ext_resource type="PackedScene" uid="uid://d1qwdh830p1ij" path="res://scenes/instances/wall.tscn" id="6_ijn1a"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2aqop"]
+font_size = 78
+
+[sub_resource type="LabelSettings" id="LabelSettings_spe6y"]
+font_size = 128
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x3kpv"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(-166, -20)
+motion_mode = 1
+script = ExtResource("1_x1fca")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+scale = Vector2(5, 5)
+texture = ExtResource("1_4yx0t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+scale = Vector2(5, 5)
+shape = ExtResource("1_7m7we")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+ignore_rotation = false
+script = ExtResource("1_0cynw")
+player = NodePath("../Player")
+
+[node name="UI" type="Control" parent="Camera2D"]
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_left = -574.0
+offset_top = -321.0
+offset_right = 575.0
+offset_bottom = 324.0
+
+[node name="folego_label" type="Label" parent="Camera2D/UI"]
+layout_mode = 0
+offset_top = 0.999996
+offset_right = 73.0
+offset_bottom = 28.0
+text = "30"
+label_settings = SubResource("LabelSettings_2aqop")
+
+[node name="Morto" type="Label" parent="Camera2D/UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -87.5
+offset_right = 190.0
+offset_bottom = 87.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Morto"
+label_settings = SubResource("LabelSettings_spe6y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bubble" parent="." instance=ExtResource("5_irofg")]
+position = Vector2(68, 132)
+
+[node name="Bubble2" parent="." instance=ExtResource("5_irofg")]
+position = Vector2(80, -227)
+
+[node name="Bubble3" parent="." instance=ExtResource("5_irofg")]
+position = Vector2(245, -26)
+tipo = 0
+
+[node name="Wall3" parent="." instance=ExtResource("6_ijn1a")]
+position = Vector2(21, -406)
+physics_material_override = SubResource("PhysicsMaterial_x3kpv")
+
+[node name="Wall" parent="." instance=ExtResource("6_ijn1a")]
+position = Vector2(-43, 302)
+physics_material_override = SubResource("PhysicsMaterial_x3kpv")
+
+[node name="Wall4" parent="." instance=ExtResource("6_ijn1a")]
+position = Vector2(355, -13)
+rotation = 1.5708
+physics_material_override = SubResource("PhysicsMaterial_x3kpv")
+
+[node name="Wall2" parent="." instance=ExtResource("6_ijn1a")]
+position = Vector2(-379, -92)
+rotation = 1.5708
+physics_material_override = SubResource("PhysicsMaterial_x3kpv")

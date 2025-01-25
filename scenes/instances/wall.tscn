@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1qwdh830p1ij"]
+
+[ext_resource type="Texture2D" uid="uid://d021fqdumupkc" path="res://art/placeholder/tijolo.jpeg" id="1_ro1ur"]
+[ext_resource type="Shape2D" uid="uid://boqc5vjfye2su" path="res://shapes/walls.tres" id="2_w41l7"]
+
+[node name="Wall" type="StaticBody2D"]
+position = Vector2(0, 307)
+
+[node name="Tijolo" type="Sprite2D" parent="."]
+scale = Vector2(3.16444, 0.355556)
+texture = ExtResource("1_ro1ur")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = ExtResource("2_w41l7")
