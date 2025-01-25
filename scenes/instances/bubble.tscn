@@ -14,3 +14,6 @@ shape = ExtResource("2_4ji88")
 [node name="Bubble" type="Sprite2D" parent="."]
 scale = Vector2(0.199999, 0.199999)
 texture = ExtResource("3_icvkv")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(3.9, 4)

@@ -16,3 +16,6 @@ shape = ExtResource("2_u4yiq")
 position = Vector2(-5.96046e-08, -1.19209e-07)
 scale = Vector2(0.199998, 0.199998)
 texture = ExtResource("3_e7n0p")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(3.9, 4)

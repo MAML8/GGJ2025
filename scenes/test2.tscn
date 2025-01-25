@@ -1,13 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://djo1rxhd1kluc"]
+[gd_scene load_steps=15 format=3 uid="uid://djo1rxhd1kluc"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_74w4s"]
 [ext_resource type="PackedScene" uid="uid://dt2rjxnyl81r2" path="res://scenes/instances/labirinto.tscn" id="1_3121k"]
 [ext_resource type="Shape2D" uid="uid://c5n0mb6rotd6m" path="res://shapes/colisão-jogador.tres" id="3_6qsp2"]
 [ext_resource type="Texture2D" uid="uid://dlbc63h8ad15c" path="res://art/placeholder/swimmer.png" id="4_6lq4h"]
-[ext_resource type="Script" path="res://scripts/camera_ui.gd" id="4_qin3b"]
+[ext_resource type="Script" path="res://scripts/Main/camera_ui.gd" id="4_qin3b"]
 [ext_resource type="Texture2D" uid="uid://kggul0da7cbd" path="res://art/placeholder/sea.jpg" id="4_yowbf"]
 [ext_resource type="PackedScene" uid="uid://du5yh8xmo8t14" path="res://scenes/instances/bubble.tscn" id="5_epc2o"]
 [ext_resource type="PackedScene" uid="uid://bf3exdpeebr3p" path="res://scenes/instances/item.tscn" id="6_2joj4"]
+[ext_resource type="PackedScene" uid="uid://byu3od7iih5ut" path="res://scenes/instances/SpawnBubble.tscn" id="7_u835p"]
 [ext_resource type="PackedScene" uid="uid://c2nkxbik6i4a3" path="res://scenes/instances/bubble_toxic.tscn" id="8_as4hd"]
 [ext_resource type="PackedScene" uid="uid://fd8bkst1cygd" path="res://scenes/instances/bubble_trap.tscn" id="9_2rp5m"]
 [ext_resource type="AudioStream" uid="uid://cvi0a75ud1baa" path="res://art/sfx/undersea.mp3" id="10_wla76"]
@@ -93,7 +94,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="msg" type="Label" parent="Camera2D/UI/Morto"]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -135,7 +135,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="msg" type="Label" parent="Camera2D/UI/Vitoria"]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -155,6 +154,20 @@ Esc para sair"
 label_settings = SubResource("LabelSettings_spe6y")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="SpawnBubble" parent="Camera2D" instance=ExtResource("7_u835p")]
+position = Vector2(-385, 375)
+spawnTimeMin = 5.0
+spawnTimeMax = 7.0
+bubbleType = 1
+bubblePopsOnWalls = false
+
+[node name="SpawnBubble2" parent="Camera2D" instance=ExtResource("7_u835p")]
+position = Vector2(385, 375)
+spawnTimeMin = 5.0
+spawnTimeMax = 7.0
+bubbleType = 1
+bubblePopsOnWalls = false
 
 [node name="coletaveis" type="Node" parent="."]
 
@@ -220,6 +233,20 @@ position = Vector2(1086, 814)
 
 [node name="Bubble-Toxic4" parent="bolhas_toxicas" instance=ExtResource("8_as4hd")]
 position = Vector2(1859, 1002)
+
+[node name="Spawners" type="Node2D" parent="."]
+
+[node name="SpawnBubble3" parent="Spawners" instance=ExtResource("7_u835p")]
+position = Vector2(110, 218)
+spawnTimeMin = 1.0
+spawnTimeMax = 5.0
+
+[node name="SpawnBubble4" parent="Spawners" instance=ExtResource("7_u835p")]
+position = Vector2(445, -264)
+
+[node name="SpawnBubble5" parent="Spawners" instance=ExtResource("7_u835p")]
+position = Vector2(405, 170)
+bubbleDirection = Vector2(0, 250)
 
 [node name="Undersea" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_wla76")

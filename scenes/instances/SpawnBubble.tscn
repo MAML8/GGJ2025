@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://byu3od7iih5ut"]
+
+[ext_resource type="Script" path="res://scripts/spawnBubble.gd" id="1_xcc8b"]
+
+[node name="SpawnBubble" type="Node2D"]
+script = ExtResource("1_xcc8b")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+one_shot = true

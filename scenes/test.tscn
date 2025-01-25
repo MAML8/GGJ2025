@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cq2jnpqup6ogt"]
 
-[ext_resource type="Script" path="res://scripts/camera_ui.gd" id="1_0cynw"]
+[ext_resource type="Script" path="res://scripts/Main/camera_ui.gd" id="1_0cynw"]
 [ext_resource type="Texture2D" uid="uid://7fhocvf0bvqp" path="res://art/placeholder/bolinha maniaca.png" id="1_4yx0t"]
 [ext_resource type="Shape2D" uid="uid://c5n0mb6rotd6m" path="res://shapes/colisão-jogador.tres" id="1_7m7we"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_x1fca"]

@@ -9,6 +9,6 @@ func _on_body_entered(body):
 	print("Colisão detectada com: ", body.name)
 	if body is Player:
 		print("Colisão confirmada com player!")
-		body.itensColetados += 1
+		body.onCollectObjective.emit();
 		#print("Contador de itens: ", body.itensColetados)
 		queue_free()

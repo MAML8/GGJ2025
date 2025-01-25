@@ -5,22 +5,13 @@ class_name Player
 @export var rotationSpeed := 0.1
 @export var folegoMax := 30.0
 var folego: float;
-
-@onready var itens_label := get_parent().get_node("Camera2D/UI/itens_coletados")
-@export var itensParaVitoria := 5;
-var itensColetados := 0:
-	set(value):
-		itensColetados = value
-		if itens_label:
-			itens_label.text = str(itensColetados)
+var preso := 0.0;
 
 var morto := false
-var vitoria := false
 signal onDeath
-signal onVictory
+signal onCollectObjective
 
 func _ready() -> void:
-	print("Label de itens encontrada: ", itens_label != null)
 	folego = folegoMax;
 	pass
 
@@ -29,14 +20,20 @@ func _process(delta: float) -> void:
 	
 	if morto:
 		return
-		
-	if itensColetados == itensParaVitoria:
-		victory()
 	
-	var diry = (1 if Input.is_action_pressed("ui_down") || Input.is_key_pressed(KEY_S) else 0) - (1 if Input.is_action_pressed("ui_up") || Input.is_key_pressed(KEY_W) else 0)
-	var dirx = (1 if Input.is_action_pressed("ui_right") || Input.is_key_pressed(KEY_D) else 0) - (1 if Input.is_action_pressed("ui_left") || Input.is_key_pressed(KEY_A) else 0)
-	var dir = to_global(Vector2(dirx, diry)) - position
-	move_and_collide(dir * moveSpeed * delta)
+	if preso <= 0:
+		var diry = (1 if Input.is_action_pressed("ui_down") else 0) - (1 if Input.is_action_pressed("ui_up") else 0)
+		var dirx = (1 if Input.is_action_pressed("ui_right") else 0) - (1 if Input.is_action_pressed("ui_left") else 0)
+		var dir = to_global(Vector2(dirx, diry)) - position
+		if dir == Vector2.ZERO && Input.is_action_pressed("press"):
+			dir = get_global_mouse_position() - position;
+		move_and_collide(dir.normalized() * moveSpeed * delta)
+	else:
+		preso -= delta;
+		if Input.is_action_just_pressed("ui_down") || Input.is_action_just_pressed("ui_up") || Input.is_action_just_pressed("ui_left") || Input.is_action_just_pressed("ui_right") || Input.is_action_just_pressed("press"):
+			preso -= 0.25;
+		if preso <= 0:
+			liberar();
 	
 	folego -= delta
 	if folego <= 0:
@@ -49,9 +46,12 @@ func alter_folego(amount: float) -> void:
 	elif folego<=0:
 		die()
 
-func victory() -> void:
-	vitoria = true
-	onVictory.emit()
+func prender() -> void:
+	preso = 5.0;
+
+func liberar() -> void:
+	preso = 0.0;
+	get_child(2).queue_free();
 
 func die() -> void:
 	morto = true
