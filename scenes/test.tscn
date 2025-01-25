@@ -71,15 +71,28 @@ label_settings = SubResource("LabelSettings_spe6y")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="itens_coletados" type="Label" parent="Camera2D/UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -89.0
+offset_bottom = 107.0
+grow_horizontal = 0
+text = "0"
+label_settings = SubResource("LabelSettings_2aqop")
+
 [node name="Bubble" parent="." instance=ExtResource("5_irofg")]
 position = Vector2(68, 132)
+script = null
 
 [node name="Bubble2" parent="." instance=ExtResource("5_irofg")]
 position = Vector2(80, -227)
+script = null
 
 [node name="Bubble3" parent="." instance=ExtResource("5_irofg")]
 position = Vector2(245, -26)
-tipo = 0
+script = null
 
 [node name="Wall3" parent="." instance=ExtResource("6_ijn1a")]
 position = Vector2(21, -406)
@@ -97,4 +110,3 @@ physics_material_override = SubResource("PhysicsMaterial_x3kpv")
 [node name="Wall2" parent="." instance=ExtResource("6_ijn1a")]
 position = Vector2(-379, -92)
 rotation = 1.5708
-physics_material_override = SubResource("PhysicsMaterial_x3kpv")

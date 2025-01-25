@@ -4,10 +4,11 @@ class_name Player
 @export var moveSpeed := 150
 @export var rotationSpeed := 0.1
 @export var folegoMax := 30.0
-var folego := folegoMax
+var folego: float;
 
-@onready var itens_label = get_parent().get_node("Camera2D/UI/itens_coletados")
-var itensColetados = 0:
+@onready var itens_label := get_parent().get_node("Camera2D/UI/itens_coletados")
+@export var itensParaVitoria := 5;
+var itensColetados := 0:
 	set(value):
 		itensColetados = value
 		if itens_label:
@@ -16,9 +17,11 @@ var itensColetados = 0:
 var morto := false
 var vitoria := false
 signal onDeath
+signal onVictory
 
 func _ready() -> void:
 	print("Label de itens encontrada: ", itens_label != null)
+	folego = folegoMax;
 	pass
 
 func _process(delta: float) -> void:
@@ -27,7 +30,7 @@ func _process(delta: float) -> void:
 	if morto:
 		return
 		
-	if itensColetados == 5:
+	if itensColetados == itensParaVitoria:
 		victory()
 	
 	var diry = (1 if Input.is_action_pressed("ui_down") || Input.is_key_pressed(KEY_S) else 0) - (1 if Input.is_action_pressed("ui_up") || Input.is_key_pressed(KEY_W) else 0)
@@ -48,7 +51,7 @@ func alter_folego(amount: float) -> void:
 
 func victory() -> void:
 	vitoria = true
-	#onVictory.emit()
+	onVictory.emit()
 
 func die() -> void:
 	morto = true
