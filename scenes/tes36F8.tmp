@@ -1,0 +1,227 @@
+[gd_scene load_steps=14 format=3 uid="uid://djo1rxhd1kluc"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_74w4s"]
+[ext_resource type="PackedScene" uid="uid://dt2rjxnyl81r2" path="res://scenes/instances/labirinto.tscn" id="1_3121k"]
+[ext_resource type="Shape2D" uid="uid://c5n0mb6rotd6m" path="res://shapes/colisão-jogador.tres" id="3_6qsp2"]
+[ext_resource type="Texture2D" uid="uid://dlbc63h8ad15c" path="res://art/placeholder/swimmer.png" id="4_6lq4h"]
+[ext_resource type="Script" path="res://scripts/camera_ui.gd" id="4_qin3b"]
+[ext_resource type="Texture2D" uid="uid://kggul0da7cbd" path="res://art/placeholder/sea.jpg" id="4_yowbf"]
+[ext_resource type="PackedScene" uid="uid://du5yh8xmo8t14" path="res://scenes/instances/bubble.tscn" id="5_epc2o"]
+[ext_resource type="PackedScene" uid="uid://bf3exdpeebr3p" path="res://scenes/instances/item.tscn" id="6_2joj4"]
+[ext_resource type="PackedScene" uid="uid://c2nkxbik6i4a3" path="res://scenes/instances/bubble_toxic.tscn" id="8_as4hd"]
+[ext_resource type="PackedScene" uid="uid://fd8bkst1cygd" path="res://scenes/instances/bubble_trap.tscn" id="9_2rp5m"]
+[ext_resource type="AudioStream" uid="uid://cvi0a75ud1baa" path="res://art/sfx/undersea.mp3" id="10_wla76"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2aqop"]
+font_size = 78
+
+[sub_resource type="LabelSettings" id="LabelSettings_spe6y"]
+font_size = 128
+
+[node name="Node2D" type="Node2D"]
+
+[node name="sea" type="Sprite2D" parent="."]
+position = Vector2(-4.50003, 13)
+scale = Vector2(11.3983, 9.62)
+texture = ExtResource("4_yowbf")
+
+[node name="Labirinto" parent="." instance=ExtResource("1_3121k")]
+position = Vector2(117, -267)
+scale = Vector2(4.6, 4.6)
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(-166, -20)
+motion_mode = 1
+script = ExtResource("1_74w4s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+scale = Vector2(-11.5284, 2.60557)
+shape = ExtResource("3_6qsp2")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Player"]
+scale = Vector2(0.52, 0.52)
+texture = ExtResource("4_6lq4h")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+ignore_rotation = false
+script = ExtResource("4_qin3b")
+player = NodePath("../Player")
+
+[node name="UI" type="Control" parent="Camera2D"]
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
+offset_left = -574.0
+offset_top = -321.0
+offset_right = 575.0
+offset_bottom = 324.0
+
+[node name="folego_label" type="Label" parent="Camera2D/UI"]
+layout_mode = 0
+offset_top = 0.999996
+offset_right = 73.0
+offset_bottom = 28.0
+text = "30"
+label_settings = SubResource("LabelSettings_2aqop")
+
+[node name="itens_coletados" type="Label" parent="Camera2D/UI"]
+layout_mode = 0
+offset_left = 1054.0
+offset_top = 0.999996
+offset_right = 1143.0
+offset_bottom = 108.0
+text = "0"
+label_settings = SubResource("LabelSettings_2aqop")
+
+[node name="Morto" type="Label" parent="Camera2D/UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -87.5
+offset_right = 190.0
+offset_bottom = 87.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Morto"
+label_settings = SubResource("LabelSettings_spe6y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="msg" type="Label" parent="Camera2D/UI/Morto"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -302.5
+offset_top = -7.5
+offset_right = 766.5
+offset_bottom = 523.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.599999, 0.599999)
+text = "
+Enter para replay
+Esc para sair"
+label_settings = SubResource("LabelSettings_spe6y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Vitoria" type="Label" parent="Camera2D/UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -87.5
+offset_right = 190.0
+offset_bottom = 87.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Você Venceu
+"
+label_settings = SubResource("LabelSettings_spe6y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="msg" type="Label" parent="Camera2D/UI/Vitoria"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -302.5
+offset_top = -7.5
+offset_right = 766.5
+offset_bottom = 523.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.599999, 0.599999)
+text = "
+Enter para replay
+Esc para sair"
+label_settings = SubResource("LabelSettings_spe6y")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="coletaveis" type="Node" parent="."]
+
+[node name="Files" parent="coletaveis" instance=ExtResource("6_2joj4")]
+position = Vector2(-897, 815)
+
+[node name="Files6" parent="coletaveis" instance=ExtResource("6_2joj4")]
+position = Vector2(-175, 266)
+
+[node name="Files2" parent="coletaveis" instance=ExtResource("6_2joj4")]
+position = Vector2(1932, 1600)
+
+[node name="Files3" parent="coletaveis" instance=ExtResource("6_2joj4")]
+position = Vector2(1369, 139)
+
+[node name="Files4" parent="coletaveis" instance=ExtResource("6_2joj4")]
+position = Vector2(-690, -2324)
+
+[node name="Files5" parent="coletaveis" instance=ExtResource("6_2joj4")]
+position = Vector2(-226, -1252)
+
+[node name="bolhas" type="Node" parent="."]
+
+[node name="Bubble" parent="bolhas" instance=ExtResource("5_epc2o")]
+position = Vector2(78, -480)
+
+[node name="Bubble2" parent="bolhas" instance=ExtResource("5_epc2o")]
+position = Vector2(117, 347)
+
+[node name="Bubble3" parent="bolhas" instance=ExtResource("5_epc2o")]
+position = Vector2(-1343, -737)
+
+[node name="Bubble4" parent="bolhas" instance=ExtResource("5_epc2o")]
+position = Vector2(1093, 1193)
+
+[node name="Bubble5" parent="bolhas" instance=ExtResource("5_epc2o")]
+position = Vector2(-206, -1824)
+
+[node name="bolhas_armadilha" type="Node" parent="."]
+
+[node name="Bubble-Trap" parent="bolhas_armadilha" instance=ExtResource("9_2rp5m")]
+position = Vector2(903, -454)
+
+[node name="Bubble-Trap2" parent="bolhas_armadilha" instance=ExtResource("9_2rp5m")]
+position = Vector2(-918, -813)
+
+[node name="Bubble-Trap3" parent="bolhas_armadilha" instance=ExtResource("9_2rp5m")]
+position = Vector2(678, -1080)
+
+[node name="Bubble-Trap4" parent="bolhas_armadilha" instance=ExtResource("9_2rp5m")]
+position = Vector2(-498, 1270)
+
+[node name="bolhas_toxicas" type="Node" parent="."]
+
+[node name="Bubble-Toxic" parent="bolhas_toxicas" instance=ExtResource("8_as4hd")]
+position = Vector2(-774, 33)
+
+[node name="Bubble-Toxic2" parent="bolhas_toxicas" instance=ExtResource("8_as4hd")]
+position = Vector2(-40, 863)
+
+[node name="Bubble-Toxic3" parent="bolhas_toxicas" instance=ExtResource("8_as4hd")]
+position = Vector2(1086, 814)
+
+[node name="Bubble-Toxic4" parent="bolhas_toxicas" instance=ExtResource("8_as4hd")]
+position = Vector2(1859, 1002)
+
+[node name="Undersea" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_wla76")
+volume_db = -10.649
+autoplay = true

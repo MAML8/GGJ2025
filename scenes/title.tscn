@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://iug2q2n2lpvg"]
+
+[ext_resource type="Texture2D" uid="uid://bk200li470n5m" path="res://art/placeholder/logo.png" id="1_kbtb0"]
+[ext_resource type="Script" path="res://scripts/press_enter.gd" id="2_g4cmm"]
+
+[node name="Logo" type="Sprite2D"]
+position = Vector2(393, 238)
+texture = ExtResource("1_kbtb0")
+script = ExtResource("2_g4cmm")
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_left = 409.0
+offset_top = 270.0
+offset_right = 582.0
+offset_bottom = 308.0
+scale = Vector2(1.44, 1.52)
+text = "Enter para continuar"
+placeholder_text = "Enter para continuar"
+
+[node name="TextEdit2" type="TextEdit" parent="."]
+offset_left = -364.0
+offset_top = 300.0
+offset_right = 219.0
+offset_bottom = 390.0
+placeholder_text = "GLOBAL GAME JAM 2025
+Mebros: João, Marcos, Victor, Suu e William
+Músicas de: asdfasdfasdfasdf
+"

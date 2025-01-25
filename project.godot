@@ -10,7 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Relic Echoes"
+config/name="Deluge Echoes"
+run/main_scene="res://scenes/title.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -27,3 +28,4 @@ project/assembly_name="Relic Echoes"
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.07551, 0.0755102, 0.0755101, 1)

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2nkxbik6i4a3"]
+
+[ext_resource type="Script" path="res://bubble.gd" id="1_3kcpw"]
+[ext_resource type="Shape2D" uid="uid://bkbdqshea4x5w" path="res://shapes/colisão_bolhas.tres" id="2_u4yiq"]
+[ext_resource type="Texture2D" uid="uid://myt1jo47sitv" path="res://art/placeholder/bubble-toxic.png" id="3_e7n0p"]
+
+[node name="Bubble-Toxic" type="Area2D"]
+position = Vector2(100, 100)
+script = ExtResource("1_3kcpw")
+tipo = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = ExtResource("2_u4yiq")
+
+[node name="Bubble-toxic" type="Sprite2D" parent="."]
+position = Vector2(-5.96046e-08, -1.19209e-07)
+scale = Vector2(0.199998, 0.199998)
+texture = ExtResource("3_e7n0p")

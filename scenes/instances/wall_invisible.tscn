@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ds3nifsh2cs6a"]
+
+[ext_resource type="Shape2D" uid="uid://boqc5vjfye2su" path="res://shapes/walls.tres" id="2_km1y4"]
+
+[node name="Wall" type="StaticBody2D"]
+position = Vector2(0, 307)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -28)
+shape = ExtResource("2_km1y4")
