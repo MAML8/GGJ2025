@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_74w4s"]
 [ext_resource type="PackedScene" uid="uid://dt2rjxnyl81r2" path="res://scenes/instances/labirinto.tscn" id="1_3121k"]
 [ext_resource type="Shape2D" uid="uid://c5n0mb6rotd6m" path="res://shapes/colisão-jogador.tres" id="3_6qsp2"]
-[ext_resource type="Texture2D" uid="uid://dlbc63h8ad15c" path="res://art/placeholder/swimmer.png" id="4_6lq4h"]
 [ext_resource type="Script" path="res://scripts/Main/camera_ui.gd" id="4_qin3b"]
 [ext_resource type="Texture2D" uid="uid://kggul0da7cbd" path="res://art/placeholder/sea.jpg" id="4_yowbf"]
 [ext_resource type="PackedScene" uid="uid://du5yh8xmo8t14" path="res://scenes/instances/bubble.tscn" id="5_epc2o"]
+[ext_resource type="SpriteFrames" uid="uid://b62r37x8mqu5o" path="res://art/Personagem/personagem.tres" id="5_fbdmm"]
 [ext_resource type="PackedScene" uid="uid://bf3exdpeebr3p" path="res://scenes/instances/item.tscn" id="6_2joj4"]
 [ext_resource type="PackedScene" uid="uid://byu3od7iih5ut" path="res://scenes/instances/SpawnBubble.tscn" id="7_u835p"]
 [ext_resource type="PackedScene" uid="uid://c2nkxbik6i4a3" path="res://scenes/instances/bubble_toxic.tscn" id="8_as4hd"]
@@ -28,20 +28,21 @@ texture = ExtResource("4_yowbf")
 
 [node name="Labirinto" parent="." instance=ExtResource("1_3121k")]
 position = Vector2(117, -267)
-scale = Vector2(4.6, 4.6)
+scale = Vector2(4.5, 4.5)
 
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("camera")]
 position = Vector2(-166, -20)
 motion_mode = 1
 script = ExtResource("1_74w4s")
+camera = NodePath("../Camera2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-scale = Vector2(-11.5284, 2.60557)
 shape = ExtResource("3_6qsp2")
 
-[node name="Sprite2D2" type="Sprite2D" parent="Player"]
-scale = Vector2(0.52, 0.52)
-texture = ExtResource("4_6lq4h")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+scale = Vector2(0.25, 0.25)
+sprite_frames = ExtResource("5_fbdmm")
+animation = &"idle"
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 ignore_rotation = false
@@ -66,12 +67,14 @@ text = "30"
 label_settings = SubResource("LabelSettings_2aqop")
 
 [node name="itens_coletados" type="Label" parent="Camera2D/UI"]
-layout_mode = 0
-offset_left = 1054.0
-offset_top = 0.999996
-offset_right = 1143.0
-offset_bottom = 108.0
-text = "0"
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -89.0
+offset_bottom = 107.0
+grow_horizontal = 0
+text = "0/5"
 label_settings = SubResource("LabelSettings_2aqop")
 
 [node name="Morto" type="Label" parent="Camera2D/UI"]
@@ -172,22 +175,22 @@ bubblePopsOnWalls = false
 [node name="coletaveis" type="Node" parent="."]
 
 [node name="Files" parent="coletaveis" instance=ExtResource("6_2joj4")]
-position = Vector2(-897, 815)
+position = Vector2(-1145, 993)
 
 [node name="Files6" parent="coletaveis" instance=ExtResource("6_2joj4")]
-position = Vector2(-175, 266)
+position = Vector2(-1083, 488)
 
 [node name="Files2" parent="coletaveis" instance=ExtResource("6_2joj4")]
-position = Vector2(1932, 1600)
+position = Vector2(2002, 2616)
 
 [node name="Files3" parent="coletaveis" instance=ExtResource("6_2joj4")]
-position = Vector2(1369, 139)
+position = Vector2(1401, 793)
 
 [node name="Files4" parent="coletaveis" instance=ExtResource("6_2joj4")]
-position = Vector2(-690, -2324)
+position = Vector2(-639, -2146)
 
 [node name="Files5" parent="coletaveis" instance=ExtResource("6_2joj4")]
-position = Vector2(-226, -1252)
+position = Vector2(-543, -674)
 
 [node name="bolhas" type="Node" parent="."]
 
@@ -237,16 +240,56 @@ position = Vector2(1859, 1002)
 [node name="Spawners" type="Node2D" parent="."]
 
 [node name="SpawnBubble3" parent="Spawners" instance=ExtResource("7_u835p")]
-position = Vector2(110, 218)
+position = Vector2(-712, 709)
 spawnTimeMin = 1.0
 spawnTimeMax = 5.0
 
 [node name="SpawnBubble4" parent="Spawners" instance=ExtResource("7_u835p")]
-position = Vector2(445, -264)
+position = Vector2(-1200, 88)
+bubbleDirection = Vector2(250, 0)
 
 [node name="SpawnBubble5" parent="Spawners" instance=ExtResource("7_u835p")]
-position = Vector2(405, 170)
+position = Vector2(-215, 1980)
 bubbleDirection = Vector2(0, 250)
+
+[node name="SpawnBubble6" parent="Spawners" instance=ExtResource("7_u835p")]
+position = Vector2(-1448, -1796)
+bubbleDirection = Vector2(-250, 0)
+bubbleType = 1
+
+[node name="SpawnBubble2" parent="Spawners" instance=ExtResource("7_u835p")]
+position = Vector2(-1888, -1496)
+bubbleDirection = Vector2(250, 0)
+
+[node name="SpawnBubble" parent="Spawners" instance=ExtResource("7_u835p")]
+position = Vector2(-1887, -521)
+bubbleDirection = Vector2(250, 0)
+
+[node name="SpawnBubble7" parent="Spawners" instance=ExtResource("7_u835p")]
+position = Vector2(-1423, -967)
+bubbleDirection = Vector2(-250, 0)
+bubbleType = 1
+
+[node name="BubbleTrap" parent="Spawners" instance=ExtResource("9_2rp5m")]
+position = Vector2(-1609, -2156)
+
+[node name="SpawnBubble8" parent="Spawners" instance=ExtResource("7_u835p")]
+position = Vector2(-300, -648)
+
+[node name="SpawnBubble9" parent="Spawners" instance=ExtResource("7_u835p")]
+position = Vector2(-994, -1770)
+bubbleDirection = Vector2(0, 250)
+bubbleType = 1
+
+[node name="SpawnBubble10" parent="Spawners" instance=ExtResource("7_u835p")]
+position = Vector2(-754, 1380)
+bubbleDirection = Vector2(0, 250)
+bubbleType = 2
+
+[node name="SpawnBubble11" parent="Spawners" instance=ExtResource("7_u835p")]
+position = Vector2(864, 1033)
+bubbleDirection = Vector2(0, 250)
+bubbleType = 2
 
 [node name="Undersea" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_wla76")

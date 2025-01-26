@@ -2,6 +2,7 @@ extends Camera2D;
 
 @export var player: Player;
 @export var quantidade_para_vencer := 5;
+@export var rotationSpeed := 0.1;
 var coletados := 0;
 var folegoLabel: Label;
 var mortoLabel: Label;
@@ -37,9 +38,9 @@ func victory() -> void:
 	onVictory.emit();
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	position = player.position;
-	rotation = player.rotation;
+	rotate(rotationSpeed * delta);
 	folegoLabel.text = str(player.folego as int) + '/' + str(player.folegoMax);
 	
 	if isGameOver:
